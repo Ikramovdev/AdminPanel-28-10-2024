@@ -1,12 +1,21 @@
-import { useState } from 'react'
 import './App.css'
+import Navbar from "./components/Navbar"
+import Header from "./components/Header"
+import CustomRoutes from './routes'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>asdds</h1>
+      <div className=''>
+        <Header/>
+        <div className='flex'>
+          <Navbar/>
+          <div className='w-[78%]'>
+            <CustomRoutes/>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

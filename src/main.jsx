@@ -5,8 +5,8 @@ import { LangContext } from './Context/Context.jsx'
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
-    <LangContext>
-        <App />
-    </LangContext>
+        <LangContext>
+            <App />
+        </LangContext>
     </BrowserRouter>
 )

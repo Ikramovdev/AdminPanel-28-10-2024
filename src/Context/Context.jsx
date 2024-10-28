@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-export const createContext = Context()
+export const Context = createContext()
 
 export const LangContext = ({children}) => {
     const [lang,setLang] = useState("uz")
