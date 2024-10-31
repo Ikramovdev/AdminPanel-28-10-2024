@@ -91,7 +91,7 @@ const Organization = () => {
 
   // get all 
     useEffect(()=>{
-      axios.get(`${HTTP}/organization?id=${innId ? innId: ""}`).then(res =>{
+      axios.get(`${HTTP}/organization?Id=${innId ? innId: ""}`).then(res =>{
         setIsLoading(false) 
         setTBodyData( res.data.map(item =>{
           item.More = <div className='flex items-center gap-2'>
