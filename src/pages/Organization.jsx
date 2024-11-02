@@ -5,7 +5,10 @@ import CustomTable from '../components/CustomTable'
 import { HTTP } from '../hook/useENV'
 import axios from 'axios'
 import { DashOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
-import useDebounce from '../hook/useDebounce'
+import useDebounce from '../hook/useDebounce' 
+import {usePath} from "../hook/usePath"
+
+
 
 const Organization = () => {
   const [isLoading,setIsLoading] = useState(false)
@@ -74,7 +77,11 @@ const Organization = () => {
   // select part 
   const [innId,setInnId] = useState("")
   function handleSelectChange(e){
-    setInnId(e)
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false )
+      setInnId(e)
+    }, 300);
   }
   useEffect(()=>{
     axios.get(`${HTTP}/organization`).then(res =>{
@@ -93,12 +100,13 @@ const Organization = () => {
     useEffect(()=>{
       axios.get(`${HTTP}/organization?Id=${innId ? innId: ""}`).then(res =>{
         setIsLoading(false) 
-        setTBodyData( res.data.map(item =>{
+        setTBodyData( res.data.map((item,index) =>{
           item.More = <div className='flex items-center gap-2'>
             <EditOutlined className='scale-[1.1] hover:scale-[1.7] cursor-pointer hover:text-blue-500 duration-300' />
             <DashOutlined className='scale-[1.1] hover:scale-[1.7] cursor-pointer hover:text-green-500 duration-300' />
             <DeleteOutlined className='scale-[1.1] hover:scale-[1.7] cursor-pointer hover:text-red-500 duration-300' />
           </div>
+          item.key = index + 1 
           item.Status = <Switch defaultChecked={JSON.parse(item.Status)}/>
           return item
         }))
@@ -107,7 +115,7 @@ const Organization = () => {
   // get all 
   return (
     <div className='p-5'>
-      <PageInfo title={'Organization'} subtitle={'Organization'} count={5} BtnTitle={'ADD'}/>
+      <PageInfo addPath={usePath.organizationAdd} title={'Organization'} subtitle={'Organization'} count={5} BtnTitle={'ADD'}/>
       <div className='flex items-center gap-5 my-5'>
         <Input onChange={handeSearchOrganization} className='w-[300px]' allowClear  placeholder='Search...' type='text' size='large'/>
         <Select

@@ -1,27 +1,64 @@
 {
-    "organization":[
-        {
-            "key": 1,
-            "Id":1,
-            "Name":"Najot Ta'lim",
-            "Inn":"123456789",
-            "Director":"Ali Zairov",
-            "CreatedAt":"2018-15-05",
-            "Status":"true ",
-            "Address":"Toshkent,Chilonzor 9kv"
-        },
-        {
-            "key": 2,
-            "Id":2,
-            "Name":"Camrbridge",
-            "Inn":"671289345",
-            "Director":"Jahongir Polatov",
-            "CreatedAt":"2014-25-02 ",
-            "Status":"false",
-            "Address":"Toshkent,Yunusobod 8kv"
-        }
-    ],
-    "users":[],
-    "adminstration":[]
-
+  "organization": [
+    {
+      "key": 1,
+      "Id": 1,
+      "Name": "Najot Ta'lim",
+      "Inn": "123456789",
+      "Director": "Ali Zairov",
+      "CreatedAt": "2018-15-05",
+      "Status": "true ",
+      "Address": "Toshkent,Chilonzor 9kv",
+      "id": "ce69"
+    },
+    {
+      "key": 2,
+      "Id": 2,
+      "Name": "Camrbridge",
+      "Inn": "671289345",
+      "Director": "Jahongir Polatov",
+      "CreatedAt": "2014-25-02 ",
+      "Status": "false",
+      "Address": "Toshkent,Yunusobod 8kv",
+      "id": "383d"
+    },
+    {
+      "id": "ae42",
+      "Name": "men",
+      "Inn": "12412412412",
+      "Director": "menda",
+      "CreatedAt": "",
+      "Status": true,
+      "Address": "sergeli"
+    },
+    {
+      "id": "1bf7",
+      "Name": "sen",
+      "Inn": "21312312312",
+      "Director": "senda",
+      "CreatedAt": "",
+      "Status": true,
+      "Address": "123123123"
+    },
+    {
+      "id": "5d9a",
+      "Name": "saqlandimi ",
+      "Inn": "213421412412",
+      "Director": "saqlandini egasi",
+      "CreatedAt": "",
+      "Status": true,
+      "Address": "1232131"
+    },
+    {
+      "id": "ca1a",
+      "Name": "nmadr",
+      "Inn": "21441414",
+      "Director": "dadasdadasdas",
+      "CreatedAt": "",
+      "Status": true,
+      "Address": "dasdadasd"
+    }
+  ],
+  "users": [],
+  "adminstration": []
 }
