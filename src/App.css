@@ -21,3 +21,9 @@
 .ant-spin-dot-holder{
     color: #001529 !important;
 }
+.deleteBtn{
+    background-color: red !important;
+}
+.updateBtn{
+    background-color: blue !important;
+}

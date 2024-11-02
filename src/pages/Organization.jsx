@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import PageInfo from "../components/PageInfo"
 import { Input, Select, Switch } from 'antd'
 import CustomTable from '../components/CustomTable'
-import { HTTP } from '../hook/useENV'
-import axios from 'axios'
 import { DashOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import useDebounce from '../hook/useDebounce' 
 import {usePath} from "../hook/usePath"
+import { useAxios } from '../hook/useAxios'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -15,41 +15,41 @@ const Organization = () => {
   const [refresh,setRefresh] = useState(false )
   const [innData,setInnData] = useState([])
   const [tBodyData,setTBodyData] = useState([])
+  const navigate = useNavigate()
   const tHeadData = [
     {
-      title: 'ID',
-      dataIndex: 'Id',
+      title: 'Id',
+      dataIndex: 'key',
     },
     {
       title: 'Name',
-      dataIndex: 'Name',
+      dataIndex: 'name',
     },
     {
       title: 'Inn',
-      dataIndex: 'Inn',
+      dataIndex: 'inn',
     },
     {
       title: 'Director',
-      dataIndex: 'Director',
+      dataIndex: 'director',
     },
     {
-      title: 'CreatedAt',
-      dataIndex: 'CreatedAt',
+      title: 'createdAt',
+      dataIndex: 'createdAt',
     },
     {
       title: 'Status',
-      dataIndex: 'Status',
+      dataIndex: 'status',
     },
     {
       title: 'Address',
-      dataIndex:'Address',
+      dataIndex:'address',
     },
     {
       title: 'More',
-      dataIndex:'More',
+      dataIndex:'more',
     },
   ];
-
 
   // Search part 
   const [searchData,setSearchData] = useState("")
@@ -67,7 +67,7 @@ const Organization = () => {
   useEffect(()=>{
     if(searchByName){
       setIsLoading(false)
-      const filtedData = tBodyData.filter(item => item.Name.toLowerCase().includes(searchByName))
+      const filtedData = tBodyData.filter(item => item.name.toLowerCase().includes(searchByName))
       setTBodyData(filtedData);
     }
   },[searchByName])
@@ -84,11 +84,11 @@ const Organization = () => {
     }, 300);
   }
   useEffect(()=>{
-    axios.get(`${HTTP}/organization`).then(res =>{
+    useAxios().get("/organization").then(res =>{
       setInnData(res.data.map(item =>{ 
         const data ={
-          value:item.Id,
-          label:`INN : ${item.Inn}`
+          value:item.id,
+          label:`inn : ${item.inn}`
         }
         return data
       }))
@@ -98,20 +98,20 @@ const Organization = () => {
 
   // get all 
     useEffect(()=>{
-      axios.get(`${HTTP}/organization?Id=${innId ? innId: ""}`).then(res =>{
+      useAxios().get(`/organization?Id=${innId ? innId: ""}`).then(res =>{
         setIsLoading(false) 
-        setTBodyData( res.data.map((item,index) =>{
-          item.More = <div className='flex items-center gap-2'>
+        setTBodyData(res.data.map((item,index) =>{
+          item.more = <div className='flex items-center gap-2'>
             <EditOutlined className='scale-[1.1] hover:scale-[1.7] cursor-pointer hover:text-blue-500 duration-300' />
-            <DashOutlined className='scale-[1.1] hover:scale-[1.7] cursor-pointer hover:text-green-500 duration-300' />
+            <DashOutlined onClick={()=> navigate(`${item.id}`)} className='scale-[1.1] hover:scale-[1.7] cursor-pointer hover:text-green-500 duration-300' />
             <DeleteOutlined className='scale-[1.1] hover:scale-[1.7] cursor-pointer hover:text-red-500 duration-300' />
           </div>
           item.key = index + 1 
-          item.Status = <Switch defaultChecked={JSON.parse(item.Status)}/>
+          item.status = <Switch defaultChecked={JSON.parse(item.status)}/>
           return item
         }))
       })
-    },[refresh, innId])
+    },[refresh,innId])
   // get all 
   return (
     <div className='p-5'>
